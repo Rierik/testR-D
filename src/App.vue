@@ -4,14 +4,24 @@ import VCalendar from 'v-calendar';
 import { ref } from 'vue';
 
 const select = ref('nanum');
+const isDarkMode = ref(false);
 
 const changeFont = (e) => {
   console.log(select.value);
 };
+
+const changeDarkMode = () => {
+  isDarkMode.value = !isDarkMode.value;
+  document.documentElement.setAttribute('color-theme', isDarkMode.value ? 'dark' : 'light');
+};
 </script>
 
 <template>
-  <div :class="select">
+  <div :class="selec">
+    <button @click="changeDarkMode">
+      <div v-if="!isDarkMode">다크모드</div>
+      <div v-else>라이트모드</div>
+    </button>
     <select @click="changeFont" v-model="select">
       <option value="nanum">NanumPenScript</option>
       <option value="roboto">Roboto</option>
@@ -30,10 +40,31 @@ const changeFont = (e) => {
   </div>
 </template>
 
-<style scoped>
+<style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root[color-theme='light'] {
+  --background-color: #ffffff;
+  --text-color: #000000;
+}
+
+:root[color-theme='dark'] {
+  --background-color: #121212;
+  --text-color: #ffffff;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+button {
+  margin: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
 
 .nanum {
   font-family: 'Nanum Pen Script', cursive;
