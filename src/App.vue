@@ -14,6 +14,23 @@ const changeDarkMode = () => {
   isDarkMode.value = !isDarkMode.value;
   document.documentElement.setAttribute('color-theme', isDarkMode.value ? 'dark' : 'light');
 };
+
+function openPopups() {
+  setTimeout(function () {
+    let popup1 = window.open('', 'Popup1', 'width=300,height=200,top=100,left=100');
+    popup1.document.write('<h1>첫 번째 팝업</h1>');
+  }, 0);
+
+  setTimeout(function () {
+    let popup3 = window.open('', 'Popup3', 'width=300,height=200,top=300,left=700');
+    popup3.document.write('<h1>세 번째 팝업</h1>');
+  }, 200);
+
+  setTimeout(function () {
+    let popup2 = window.open('', 'Popup2', 'width=300,height=200,top=150,left=400');
+    popup2.document.write('<h1>두 번째 팝업</h1>');
+  }, 400);
+}
 </script>
 
 <template>
@@ -37,6 +54,12 @@ const changeDarkMode = () => {
     <div>가가가가가</div>
     <HelloWorld msg="Vite + Vue" />
     <VCalendar title-position="left" />
+  </div>
+
+  <div class="">
+    <p>팝업테스트</p>
+
+    <button @click="openPopups">팝업 열기</button>
   </div>
 </template>
 
